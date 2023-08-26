@@ -49,7 +49,7 @@ mainRouter.get('/products/:id', async(req,res)=>{
 });
 
 
-mainRouter.post('/signup', async(req,res)=>{
+mainRouter.post('/register', async(req,res)=>{
     const {username, email, password, gender, phonenumber} = req.body; 
     console.log(req.body);
     const encryptedPassword = await hash(password, 10);
