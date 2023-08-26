@@ -67,7 +67,7 @@ adminRouter.post('/createproduct' ,upload.single('cover') , async (req,res)=>{
 
       
 
-        const newPost = await productModel.create({
+        const newProduct = await productModel.create({
             cover: uploadurl,
             title, 
             description,
@@ -79,16 +79,11 @@ adminRouter.post('/createproduct' ,upload.single('cover') , async (req,res)=>{
             
         });
 
-        res.status(201).json({newPost});
+        res.status(201).json({newProduct});
     }
     catch(err) {
         console.log(err);
     }
 });
-
-
-
-
-
 
 export default adminRouter;
