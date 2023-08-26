@@ -65,7 +65,7 @@ adminRouter.post('/createproduct' ,upload.single('cover') , async (req,res)=>{
 
         let uploadurl =  req.protocol + "://" +req.get("host") +"/" + process.env.UPLOAD_PATH +"/" + req.file.filename;
 
-        // http://localhost:8080/uploads/abc.jpg
+      
 
         const newPost = await productModel.create({
             cover: uploadurl,
