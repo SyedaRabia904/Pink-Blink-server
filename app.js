@@ -28,3 +28,4 @@ app.use('/main', mainRouter);
 app.listen(process.env.PORT,()=>{
     console.log("server started listening on PORT: ",process.env.PORT)
 })
+export default app;
