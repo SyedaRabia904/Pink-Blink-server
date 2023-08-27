@@ -3,7 +3,11 @@ import { productModel } from "../models/products.js";
 import { hash, compare } from 'bcrypt';
 import { userModel } from "../models/users.js";
 import jwt from 'jsonwebtoken';
+import multer from "multer";
 const mainRouter = Router();
+const upload = multer()
+
+mainRouter.use(upload.array())
 
 mainRouter.get('/products', async(req,res)=>{
 
