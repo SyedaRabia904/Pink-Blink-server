@@ -63,10 +63,11 @@ let upload=  multer({
     }
 })
 
-adminRouter.post('/createproduct' ,upload.single('cover') , async (req,res)=>{
+adminRouter.post('/createproduct/:collection' ,upload.single('cover') , async (req,res)=>{
     try {
         console.log(req.body);
-        const {title, body, userId} = req.body;
+        const collection = req.params.collection;
+        const {title, description , userId, price, originalprice, discount , stock } = req.body;
 
         let uploadurl =  req.protocol + "://" +req.get("host") +"/" + process.env.UPLOAD_PATH +"/" + req.file.filename;
 
@@ -75,7 +76,7 @@ adminRouter.post('/createproduct' ,upload.single('cover') , async (req,res)=>{
         let newProduct;
         if (collection === "womanwear") {
             newProduct = await productModel.create({
-                cover1: uploadurl,
+                cover: uploadurl,
                 cover2: uploadurl,
                 title, 
                 description,

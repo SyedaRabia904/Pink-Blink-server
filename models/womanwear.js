@@ -1,7 +1,7 @@
 import { mongoose,  Schema } from "mongoose";
 
 const WomanwearSchema = new Schema({
-    cover1:{
+    cover:{
         type: String,
         required: true
     },
