@@ -1,5 +1,7 @@
 import { Router } from "express";
-import { productModel } from "../models/products.js";
+import { productModel } from "../models/womanwear.js";
+import { productModel3 } from "../models/skincare.js";
+import { productModel2 } from "../models/makeup.js";
 import { hash, compare } from 'bcrypt';
 import { userModel } from "../models/users.js";
 import jwt from 'jsonwebtoken';
@@ -9,7 +11,7 @@ const upload = multer()
 
 mainRouter.use(upload.array())
 
-mainRouter.get('/products', async(req,res)=>{
+mainRouter.get('/womanwear', async(req,res)=>{
 
     try {
         const data = await productModel.find();
@@ -20,7 +22,47 @@ mainRouter.get('/products', async(req,res)=>{
            
         }
         else {
-            res.json({message: "No products found"});
+            res.json({message: "No clothes found"});
+        }
+        res.end();
+    }
+    catch(err) {
+        console.log(err);
+    }
+   
+});
+mainRouter.get('/makeup', async(req,res)=>{
+
+    try {
+        const data = await productModel2.find();
+        const count = await productModel2.count();
+        
+        if(count > 0){
+            res.json(data);
+           
+        }
+        else {
+            res.json({message: "No makeup products found"});
+        }
+        res.end();
+    }
+    catch(err) {
+        console.log(err);
+    }
+   
+});
+mainRouter.get('/skincare', async(req,res)=>{
+
+    try {
+        const data = await productModel3.find();
+        const count = await productModel3.count();
+        
+        if(count > 0){
+            res.json(data);
+           
+        }
+        else {
+            res.json({message: "No skincare products found"});
         }
         res.end();
     }
@@ -30,19 +72,61 @@ mainRouter.get('/products', async(req,res)=>{
    
 });
 
-mainRouter.get('/products/:id', async(req,res)=>{
+mainRouter.get('/womanwear/:id', async(req,res)=>{
 
     try {
 
-        let productId= req.params.id;
+        let womanwearId= req.params.id;
         // 64e22a06f97d37f307defd5f
-        const data = await productModel.findById({ _id: productId });
+        const data = await productModel.findById({ _id: womanwearId });
         
         if(data){
             res.json(data);
         }
         else {
             res.json({message: "No product with specified id was found"});
+        }
+        res.end();
+    }
+    catch(err) {
+        console.log(err);
+    }
+   
+});
+mainRouter.get('/makeup/:id', async(req,res)=>{
+
+    try {
+
+        let makeupId= req.params.id;
+        // 64e22a06f97d37f307defd5f
+        const data = await productModel2.findById({ _id: makeupId });
+        
+        if(data){
+            res.json(data);
+        }
+        else {
+            res.json({message: "No makeup product with specified id was found"});
+        }
+        res.end();
+    }
+    catch(err) {
+        console.log(err);
+    }
+   
+});
+mainRouter.get('/skincare/:id', async(req,res)=>{
+
+    try {
+
+        let skincareId= req.params.id;
+        // 64e22a06f97d37f307defd5f
+        const data = await productModel3.findById({ _id: skincareId });
+        
+        if(data){
+            res.json(data);
+        }
+        else {
+            res.json({message: "No skincare product with specified id was found"});
         }
         res.end();
     }

@@ -1,8 +1,13 @@
 import { Router } from "express";
 import jwt from 'jsonwebtoken';
 import { userModel } from "../models/users.js";
-import { productModel } from "../models/products.js";
+import { productModel } from "../models/womanwear.js";
 import multer, { diskStorage } from "multer";
+import { productModel2 } from "../models/makeup.js";
+import { productModel3 } from "../models/skincare.js";
+
+
+
 const adminRouter = Router();
 
 
@@ -67,22 +72,47 @@ adminRouter.post('/createproduct' ,upload.single('cover') , async (req,res)=>{
 
       
 
-        const newProduct = await productModel.create({
-            cover: uploadurl,
-            title, 
-            description,
-            price,
-            originalprice,
-            discount,
-            stock,
-            user: userId,
-            
-        });
+        let newProduct;
+        if (collection === "womanwear") {
+            newProduct = await productModel.create({
+                cover1: uploadurl,
+                cover2: uploadurl,
+                title, 
+                description,
+                price,
+                originalprice,
+                discount,
+                stock,
+                user: userId,
+            });
+        } else if (collection === "makeup") {
+            newProduct = await productModel2.create({
+                cover: uploadurl,
+                title, 
+                description,
+                price,
+                originalprice,
+                discount,
+                stock,
+                user: userId,
+            });
+        } else if (collection === "skincare") {
+            newProduct = await productModel3.create({
+                cover: uploadurl,
+                title, 
+                description,
+                price,
+                originalprice,
+                discount,
+                stock,
+                user: userId,
+            });
+        }
 
-        res.status(201).json({newProduct});
-    }
-    catch(err) {
+        res.status(201).json({ newProduct });
+    } catch (err) {
         console.log(err);
+        res.status(500).json({ message: "Internal Server Error" });
     }
 });
 

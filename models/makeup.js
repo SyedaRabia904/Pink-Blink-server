@@ -1,6 +1,6 @@
 import { mongoose,  Schema } from "mongoose";
 
-const ProductsSchema = new Schema({
+const MakeupSchema = new Schema({
     cover:{
         type: String,
         required: true
@@ -45,4 +45,4 @@ const ProductsSchema = new Schema({
     },
 });
 
-export const productModel = mongoose.model('products', ProductsSchema);
+export const productModel2 = mongoose.model('makeup', MakeupSchema);
